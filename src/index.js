@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import * as serviceWorker from './serviceWorker';
-
 import Layout from './layout';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const history = createBrowserHistory();
 

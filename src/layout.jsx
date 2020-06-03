@@ -1,10 +1,13 @@
 import React from 'react';
+import Menu from './components/menu';
+import Footer from './components/footer';
 
 function layout() {
   return (
-    <div>
-      aaa
-    </div>
+    <>
+      <Menu />
+      <Footer />
+    </>
   );
 }
 
