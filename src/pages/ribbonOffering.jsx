@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import CartActions from '../actions/cart';
 
 function RibbonOffering(props) {
   const title = Object.keys(props.productData);
@@ -32,7 +33,13 @@ function RibbonOffering(props) {
         </p>
 
         <p>
-          <Button size="sm">Add to cart</Button>
+          <Button
+            size="sm"
+            onClick={() => CartActions.AddToCart(
+              props.productData,
+            )}
+          >Add to cart
+          </Button>
         </p>
       </Col>
     </Col>

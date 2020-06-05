@@ -29,6 +29,7 @@
     "react/no-array-index-key": "off",
     "no-shadow": "off",
     "eqeqeq": "off",
+    "no-underscore-dangle": "off",
     "consistent-return": "off"
   }
 }
