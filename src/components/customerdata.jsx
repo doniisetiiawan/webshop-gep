@@ -2,20 +2,29 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import CustomerActions from '../actions/customer';
 
-class CustomerData extends Component {
+class customerdata extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       customer: {
-        name: '',
-        address: '',
-        zipCode: '',
-        city: '',
+        name: this.props.customer.address.name
+          ? this.props.customer.address.name
+          : '',
+        address: this.props.customer.address.address
+          ? this.props.customer.address.address
+          : '',
+        zipCode: this.props.customer.address.zipCode
+          ? this.props.customer.address.zipCode
+          : '',
+        city: this.props.customer.address.city
+          ? this.props.customer.address.city
+          : '',
       },
-      validAddress: false,
+      validAddress: this.props.customer.validAddress
+        ? this.props.customer.validAddress
+        : false,
     };
-
     this.inputName = React.createRef();
     this.inputAddress = React.createRef();
     this.inputZipCode = React.createRef();
@@ -32,7 +41,7 @@ class CustomerData extends Component {
   handleChangeName = () => {
     const { state } = this;
     state.customer.name = this.inputName.current.value;
-    if (this.checkAllValidations) {
+    if (this.checkAllValidations()) {
       state.validAddress = true;
     }
     this.setState(state);
@@ -49,7 +58,7 @@ class CustomerData extends Component {
   handleChangeAddress = () => {
     const state = { ...this.state };
     state.customer.address = this.inputAddress.current.value;
-    if (this.checkAllValidations) {
+    if (this.checkAllValidations()) {
       state.validAddress = true;
     }
     this.setState(state);
@@ -66,7 +75,7 @@ class CustomerData extends Component {
   handleChangeZipCode = () => {
     const state = { ...this.state };
     state.customer.zipCode = this.inputZipCode.current.value;
-    if (this.checkAllValidations) {
+    if (this.checkAllValidations()) {
       state.validAddress = true;
     }
     this.setState(state);
@@ -83,21 +92,22 @@ class CustomerData extends Component {
   handleChangeCity = () => {
     const state = { ...this.state };
     state.customer.city = this.inputCity.current.value;
-    if (this.checkAllValidations) {
+    if (this.checkAllValidations()) {
       state.validAddress = true;
     }
     this.setState(state);
+    console.log(state);
     CustomerActions.SaveAddress(state);
   };
 
-  checkAllValidations = () => this.validationStateName == 'success'
-    && this.validationStateAddress == 'success'
-    && this.validationStateZipCode == 'success'
-    && this.validationStateCity == 'success';
+  checkAllValidations = () => this.validationStateName() === 'success'
+    && this.validationStateAddress() === 'success'
+    && this.validationStateZipCode() === 'success'
+    && this.validationStateCity() === 'success';
 
   render() {
     return (
-      <>
+      <div>
         <Form>
           <Form.Control
             type="text"
@@ -108,29 +118,24 @@ class CustomerData extends Component {
             onChange={this.handleChangeName}
           />
           {this.validationStateName()}
-
           <Form.Control
             type="text"
             value={this.state.customer.address}
             placeholder="Enter your street address"
             label="Street "
-            hasFeedback
             ref={this.inputAddress}
             onChange={this.handleChangeAddress}
           />
           {this.validationStateAddress()}
-
           <Form.Control
             type="text"
             value={this.state.customer.zipCode}
             placeholder="Enter your zip code"
             label="Zip Code"
-            hasFeedback
             ref={this.inputZipCode}
             onChange={this.handleChangeZipCode}
           />
           {this.validationStateZipCode()}
-
           <Form.Control
             type="text"
             value={
@@ -140,15 +145,14 @@ class CustomerData extends Component {
             }
             placeholder="Enter your city"
             label="City"
-            hasFeedback
             ref={this.inputCity}
             onChange={this.handleChangeCity}
           />
           {this.validationStateCity()}
         </Form>
-      </>
+      </div>
     );
   }
 }
 
-export default CustomerData;
+export default customerdata;

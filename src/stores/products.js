@@ -12,13 +12,10 @@ class ProductStore extends Reflux.Store {
   }
 
   onFetchProducts = () => {
-    Request.get('http://localhost:3000/products.json').end(
-      (err, res) => {
-        // console.log(JSON.parse(res.text));
-        if (err) console.log(err);
-        this.trigger({ products: res.text });
-      },
-    );
+    Request.get('http://localhost:3000/products.json').end((err, res) => {
+      if (err) alert(err);
+      this.trigger(JSON.parse(res.text));
+    });
   };
 }
 

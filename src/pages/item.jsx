@@ -1,39 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import Reflux from 'reflux';
+import { withRouter } from 'react-router-dom';
 import ProductInfo from './productInfo';
-import ProductStore from '../stores/products';
-import Actions from '../actions/products';
 
-class item extends Reflux.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      products: JSON.stringify({
-        products: { main_offering: [], sale_offerings: [] },
-      }),
-    };
-    this.store = ProductStore;
-  }
-
-  componentDidMount = () => {
-    Actions.FetchProducts();
-  };
-
+class item extends Component {
   render() {
-    if (!this.state.products) return null;
+    console.log(this.props);
+    if (!this.props.products) return null;
 
-    const json = JSON.parse(this.state.products);
-
-    const products = json.products.main_offering.concat(
-      json.products.sale_offerings,
+    const products = this.props.products.main_offering.concat(
+      this.props.products.sale_offerings,
     );
     const data = products.filter(
       (item) => item[Object.keys(item)].SKU
         === this.props.match.params.id,
     );
-    console.log(data);
 
     if (!data.length) {
       return (
@@ -42,7 +23,7 @@ class item extends Reflux.Component {
             <Col xs={12}>
               <h1>Product missing</h1>
               <p>
-                I m sorry, but the product could not be
+                I'm sorry, but the product could not be
                 found.
               </p>
             </Col>
@@ -62,4 +43,4 @@ class item extends Reflux.Component {
   }
 }
 
-export default item;
+export default withRouter(item);
