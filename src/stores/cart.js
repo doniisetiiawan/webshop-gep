@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import Reflux from 'reflux';
 import CartActions from '../actions/cart';
 
@@ -6,13 +7,15 @@ let _cart = { cart: [] };
 class CartStore extends Reflux.Store {
   constructor() {
     super();
+    this.state = {
+      cart: [],
+    };
+    this.listenTo(CartActions.FetchCart, this.fetchCart);
     this.listenTo(CartActions.AddToCart, this.onAddToCart);
-
     this.listenTo(
       CartActions.RemoveFromCart,
       this.onRemoveFromCart,
     );
-
     this.listenTo(CartActions.ClearCart, this.onClearCart);
   }
 
@@ -27,16 +30,15 @@ class CartStore extends Reflux.Store {
 
   onAddToCart = (item) => {
     _cart.cart.push(item);
-    sessionStorage.setItem('cart', JSON.stringify(_cart));
+    sessionStorage.setItem("cart", JSON.stringify(_cart));
     this.emit();
-    console.log(_cart);
   };
 
   onRemoveFromCart = (item) => {
-    _cart.cart = _cart.cart.filter(
-      (cartItem) => item !== cartItem,
-    );
-    sessionStorage.setItem('cart', JSON.stringify(_cart));
+    _cart.cart = _cart.cart.filter((cartItem)=>{
+      return item !== cartItem
+    });
+    sessionStorage.setItem("cart", JSON.stringify(_cart));
     this.emit();
   };
 

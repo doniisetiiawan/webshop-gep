@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
-import { Nav, Navbar } from 'react-bootstrap';
 import React from 'react';
 import Reflux from 'reflux';
+import { Nav, Navbar } from 'react-bootstrap';
 import CartStore from '../stores/cart';
+import Actions from '../actions/cart';
 
 class menu extends Reflux.Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class menu extends Reflux.Component {
 
     this.state = { cart: [] };
     this.store = CartStore;
+  }
+
+  componentDidMount = () => {
+    Actions.FetchCart();
   }
 
   render() {
@@ -33,7 +38,7 @@ class menu extends Reflux.Component {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link eventKey={2} href="/checkout">
+            <Nav.Link eventKey={5} href="/checkout">
               Your cart: {this.state.cart.length} items
             </Nav.Link>
           </Nav>

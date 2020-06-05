@@ -7,10 +7,10 @@ import { createBrowserHistory } from 'history';
 import Layout from './layout';
 import Home from './pages/home';
 import Company from './pages/company';
-import Checkout from './pages/checkout';
 import Receipt from './pages/receipt';
 import Products from './pages/products';
 import Item from './pages/item';
+import Checkout from './pages/checkout';
 
 const history = createBrowserHistory();
 
