@@ -2,21 +2,8 @@
 import React from 'react';
 import Reflux from 'reflux';
 import { Nav, Navbar } from 'react-bootstrap';
-import CartStore from '../stores/cart';
-import Actions from '../actions/cart';
 
 class menu extends Reflux.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { cart: [] };
-    this.store = CartStore;
-  }
-
-  componentDidMount = () => {
-    Actions.FetchCart();
-  }
-
   render() {
     return (
       <Navbar bg="dark" fixed="top" variant="dark">
@@ -33,13 +20,10 @@ class menu extends Reflux.Component {
             <Nav.Link eventKey={3} href="/company">
               Company
             </Nav.Link>
-            <Nav.Link eventKey={4} href="/checkout">
-              Checkout
-            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link eventKey={5} href="/checkout">
-              Your cart: {this.state.cart.length} items
+              Your cart: {this.props.cart.length} items
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

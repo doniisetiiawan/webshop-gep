@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import Offerings from './offerings';
 
-class Products extends Component {
-  render() {
-    return (
-      <Container>
-        <Offerings
-          productData={this.props.products.main_offering}
-          type="main"
-          maxProducts={1}
-        />
-        <Offerings
-          productData={this.props.products.sale_offerings}
-          type="ribbon"
-          maxProducts={3}
-        />
-      </Container>
-    );
-  }
+function Products(props) {
+  return (
+    <Container>
+      <Offerings
+        productData={props.products.main_offering}
+        type="main"
+        maxProducts={1}
+      />
+      <Offerings
+        productData={props.products.sale_offerings}
+        type="ribbon"
+        maxProducts={3}
+      />
+    </Container>
+  );
 }
 
 export default Products;

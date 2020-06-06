@@ -30,15 +30,15 @@ class CartStore extends Reflux.Store {
 
   onAddToCart = (item) => {
     _cart.cart.push(item);
-    sessionStorage.setItem("cart", JSON.stringify(_cart));
+    sessionStorage.setItem('cart', JSON.stringify(_cart));
     this.emit();
   };
 
   onRemoveFromCart = (item) => {
-    _cart.cart = _cart.cart.filter((cartItem)=>{
-      return item !== cartItem
-    });
-    sessionStorage.setItem("cart", JSON.stringify(_cart));
+    _cart.cart = _cart.cart.filter(
+      (cartItem) => item !== cartItem,
+    );
+    sessionStorage.setItem('cart', JSON.stringify(_cart));
     this.emit();
   };
 
