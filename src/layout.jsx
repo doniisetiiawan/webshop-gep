@@ -14,6 +14,7 @@ import Item from './pages/item';
 import Checkout from './pages/checkout';
 import CartStore from './stores/cart';
 import CustStore from './stores/customer';
+import Receipt from './pages/receipt';
 
 const history = createBrowserHistory();
 
@@ -48,6 +49,10 @@ class Layout extends Reflux.Component {
             <Route
               path="/checkout"
               render={() => <Checkout {...this.state} />}
+            />
+            <Route
+              path="/receipt"
+              render={() => <Receipt {...this.state} />}
             />
           </Switch>
         </Router>

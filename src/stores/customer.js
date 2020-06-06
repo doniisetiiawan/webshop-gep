@@ -18,7 +18,6 @@ class customer extends Reflux.Store {
 
   onSaveAddress = (address) => {
     _customer = address;
-    console.log(_customer);
     this.emit();
   };
 

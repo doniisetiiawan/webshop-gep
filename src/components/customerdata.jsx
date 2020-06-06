@@ -96,7 +96,6 @@ class customerdata extends Component {
       state.validAddress = true;
     }
     this.setState(state);
-    console.log(state);
     CustomerActions.SaveAddress(state);
   };
 
